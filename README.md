@@ -1,4 +1,4 @@
-ansible_unregistervm_windows_newvmmounted
+ansible_unregistervm_windows_newvmmounted_hyperv
 ======================
 
 This is an ansible role to perform unregister Hyper-V Windows VM before unmounting with Actifio.
