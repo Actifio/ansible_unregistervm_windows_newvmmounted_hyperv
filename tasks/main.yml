@@ -1,0 +1,31 @@
+---
+
+# Pre-Flight check for valiable consistency
+- fail:
+    msg: the variable "{{ item }}" should be defined.
+  when: item == ''
+  with_items:
+    - "{{ tgt_vm_name }}"
+    - "{{ vmwin_adminpassword }}"
+
+# Remove Windows License Key to VM
+- name: remove windows license key to vm
+  win_shell: |
+    $pwd = ConvertTo-SecureString -AsPlainText -Force "{{ vmwin_adminpassword }}"
+    $cred = New-Object System.Management.Automation.PSCredential("{{ vmwin_adminuser }}",$pwd)
+    Invoke-Command -VMName '{{ tgt_vm_name }}' -Credential $cred -ScriptBlock { Start-Process C:\Windows\System32\slmgr.vbs -ArgumentList "/rearm" }
+
+# Pause 5 seconds for next action
+- pause: seconds=5
+
+# Remove Computer from Domain
+- name: remove computer from domain
+  win_shell: |
+    $pwd = ConvertTo-SecureString -AsPlainText -Force "{{ vmwin_adminpassword }}"
+    $cred = New-Object System.Management.Automation.PSCredential("{{ vmwin_adminuser }}",$pwd)
+    Invoke-Command -VMName '{{ tgt_vm_name }}' -Credential $cred -ScriptBlock { Remove-Computer -Force }
+
+# Stop VM
+- name: stop vm using winrm module
+  win_shell: Stop-VM -name '{{ tgt_vm_name }}' -Force
+

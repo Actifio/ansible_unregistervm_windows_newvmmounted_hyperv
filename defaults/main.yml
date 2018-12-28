@@ -1,0 +1,13 @@
+---
+# defaults file for ansible_customize_winvm_newvmmounted
+
+# Target VM Name
+tgt_vm_name: ''
+
+# Source VM Windows Administrator User Name
+vmwin_adminuser: 'Administrator'
+
+# Source VM Windows Administrator Password
+vmwin_adminpassword: ''
+
+
