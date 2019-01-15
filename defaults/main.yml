@@ -10,4 +10,6 @@ vmwin_adminuser: 'Administrator'
 # Source VM Windows Administrator Password
 vmwin_adminpassword: ''
 
+# AD Domain Name of VM
+vmwin_ad_domain: ''
 

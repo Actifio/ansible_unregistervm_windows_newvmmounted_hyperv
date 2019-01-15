@@ -24,6 +24,7 @@
     $pwd = ConvertTo-SecureString -AsPlainText -Force "{{ vmwin_adminpassword }}"
     $cred = New-Object System.Management.Automation.PSCredential("{{ vmwin_adminuser }}",$pwd)
     Invoke-Command -VMName '{{ tgt_vm_name }}' -Credential $cred -ScriptBlock { Remove-Computer -Force }
+  when: vmwin_ad_domain != ''
 
 # Stop VM
 - name: stop vm using winrm module

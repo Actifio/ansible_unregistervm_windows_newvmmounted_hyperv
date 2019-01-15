@@ -23,6 +23,7 @@ Following variables are accepted/required for this role.
 | tgt_vm_name      | Target VM name which will be customized with this role. | Y
 | vmwin_adminuser      | Administrator user name of the target Windows VM. Default is 'Administrator' | Y
 | vmwin_adminpassword  | Administrator user password of the target Windows VM. | Y
+| vmwin_ad_domain  | AD domain name of the target Windows VM. | N
 
 Example Playbook
 ----------------
